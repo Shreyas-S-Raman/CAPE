@@ -51,7 +51,7 @@
   </div>
   <div class="navbar-menu">
     <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="PUT YOUR HOME PAGE HERE">
+      <a class="navbar-item" href="https://shreyas-s-raman.github.io/CAPE/">
       <span class="icon">
           <i class="fas fa-home"></i>
       </span>
@@ -138,6 +138,15 @@
                       <i class="ai ai-arxiv"></i>
                   </span>
                   <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2211.09935"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-image"></i>
+                  </span>
+                  <span>Poster</span>
                 </a>
               </span>
               <!-- Video Link. -->
@@ -263,14 +272,14 @@
           <p>
             Extracting commonsense knowledge from a large language model (LLM) offers a path to designing intelligent robots.
             Existing approaches that leverage LLMs for planning are unable to recover when an action fails and often resort to retrying failed actions, without resolving the error’s underlying cause. 
-            We propose a novel approach (CAPE – <i>Corrective Actions from Precondition Errors</i>) that attempts to propose corrective actions to resolve precondition errors during planning. 
+            We propose a novel approach (CAPE – <i>Corrective Actions from Precondition Errors</i>) that  <b>attempts to propose corrective actions to resolve precondition errors during planning</b>. 
             CAPE improves the quality of generated plans by leveraging few-shot reasoning from action preconditions.
           </p>
           <p>
             Our approach enables embodied agents to execute more tasks than baseline methods while ensuring semantic correctness and minimizing re-prompting.
-            In VirtualHome, CAPE generates executable plans while improving a human-annotated plan correctness metric from 28.89% to 49.63% over SayCan. 
-            Our improvements transfer to a Boston Dynamics Spot robot initialized with a set of skills (specified in language) and associated preconditions, where CAPE improves the correctness metric of the executed task plans by 76.49% compared to SayCan.
-            Our approach enables the robot to follow natural language commands and robustly recover from failures, which baseline approaches largely cannot resolve or address inefficiently.
+            In VirtualHome, CAPE generates executable plans while <b>improving a human-annotated plan correctness metric from 28.89% to 49.63% over SayCan</b>. 
+            Our improvements transfer to a Boston Dynamics Spot robot initialized with a set of skills (specified in language) and associated preconditions, where CAPE <b>improves the correctness metric of the executed task plans by 76.49% compared to SayCan</b>.
+            Our approach enables the <b>robot to follow natural language commands and robustly recover from failures</b>, which baseline approaches largely cannot resolve or address inefficiently.
           </p>
         </div>
       </div>
@@ -282,8 +291,12 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Video Summary</h2>
         <div class="publication-video">
-          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          <!-- <iframe src="https://www.youtube.com/embed/fvwMNiVLYzU?si=0ZTDuAmSCrfzvRjG&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
+          <video id="matting-video" controls playsinline height="100%">
+            <source src="./static/videos/icra_video.mp4"
+                    type="video/mp4">
+          </video>
         </div>
       </div>
     </div>
@@ -300,54 +313,31 @@
       <!-- Visual Effects. -->
       <div class="column">
         <div class="content">
-          <h2 class="title is-3">Visual Effects</h2>
+          <h2 class="title is-3">Methodology</h2>
           <p>
-            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
-            would be impossible without nerfies since it would require going through a wall.
-          </p>
-          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/dollyzoom-stacked.mp4"
-                    type="video/mp4">
-          </video>
+            CAPE uses an LLM to generate plans for tasks specified in natural
+            language. When the agent <i>fails to execute</i> a step due to <i>unsafisfied pre-conditions</i>, we re-prompt the LLM with error information, utilizing latent commonsense reasoning and fewshot learning capabilities of LLMs to overcome pre-condition errors.
+          </p> 
+          <img src="./static/images/cape_pipeline.jpg" height="100%">
         </div>
       </div>
       <!--/ Visual Effects. -->
-
-      <!-- Matting. -->
-      <div class="column">
-        <h2 class="title is-3">Matting</h2>
-        <div class="columns is-centered">
-          <div class="column content">
-            <p>
-              As a byproduct of our method, we can also solve the matting problem by ignoring
-              samples that fall outside of a bounding box during rendering.
-            </p>
-            <video id="matting-video" controls playsinline height="100%">
-              <source src="./static/videos/matting.mp4"
-                      type="video/mp4">
-            </video>
-          </div>
-
-        </div>
-      </div>
     </div>
     <!--/ Matting. -->
 
     <!-- Animation. -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">Animation</h2>
+        <h2 class="title is-3">Results Summary</h2>
 
         <!-- Interpolating. -->
-        <h3 class="title is-4">Interpolating states</h3>
+        <h3 class="title is-4">Quantiative Results</h3>
         <div class="content has-text-justified">
           <p>
-            We can also animate the scene by interpolating the deformation latent codes of two input
-            frames. Use the slider here to linearly interpolate between the left frame and the right
-            frame.
+            CAPE reduces executability error rate by ~50% and improves semantic correctness by ~20% compared to the best baselines
           </p>
         </div>
-        <div class="columns is-vcentered interpolation-panel">
+        <!-- <div class="columns is-vcentered interpolation-panel">
           <div class="column is-3 has-text-centered">
             <img src="./static/images/interpolate_start.jpg"
                  class="interpolation-image"
@@ -368,12 +358,25 @@
                  alt="Interpolation end reference image."/>
             <p class="is-bold">End Frame</p>
           </div>
+        </div> -->
+
+        <h3 class="title is-4">Qualitative Results</h3>
+        <div class="column">
+          <div class="content">
+            <p>
+              Qualitative results of CAPE for robot execution and in the VirtualHome environment. Re-prompting with precondition error
+              information help resolve action failures and progress plans
+            </p> 
+            <img src="./static/images/robot_example.jpg" height="100%">
+            <img src="./static/images/vh_example.png">
+            
+          </div>
         </div>
         <br/>
         <!--/ Interpolating. -->
 
         <!-- Re-rendering. -->
-        <h3 class="title is-4">Re-rendering the input video</h3>
+        <!-- <h3 class="title is-4">Re-rendering the input video</h3>
         <div class="content has-text-justified">
           <p>
             Using <span class="dnerf">Nerfies</span>, you can re-render a video from a novel
@@ -390,7 +393,7 @@
             <source src="./static/videos/replay.mp4"
                     type="video/mp4">
           </video>
-        </div>
+        </div> -->
         <!--/ Re-rendering. -->
 
       </div>
@@ -399,7 +402,7 @@
 
 
     <!-- Concurrent Work. -->
-    <div class="columns is-centered">
+    <!-- <div class="columns is-centered">
       <div class="column is-full-width">
         <h2 class="title is-3">Related Links</h2>
 
@@ -422,7 +425,7 @@
           </p>
         </div>
       </div>
-    </div>
+    </div> -->
     <!--/ Concurrent Work. -->
 
   </div>
@@ -450,7 +453,7 @@
          href="https://arxiv.org/pdf/2211.09935.pdf">
         <i class="fas fa-file-pdf"></i>
       </a>
-      <a class="icon-link" href="PUT YOUR GITHUB HERE" class="external-link" disabled>
+      <a class="icon-link" href="https://github.com/Shreyas-S-Raman" class="external-link" disabled>
         <i class="fab fa-github"></i>
       </a>
     </div>
@@ -458,7 +461,7 @@
       <div class="column is-8">
         <div class="content">
           <p>
-            Website template borrowed from <a href="https://github.com/nerfies/nerfies.github.io">NeRFies</a> made by the amazing <a href="https://keunhong.com/">Keunhong Park</a>.
+            Website uses the <a href="https://github.com/nerfies/nerfies.github.io">NeRFies</a> template written by <a href="https://keunhong.com/">Keunhong Park</a>.
           </p>
         </div>
       </div>
