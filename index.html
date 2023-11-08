@@ -338,8 +338,204 @@
           </p>
           <div class="columns is-vcentered interpolation-panel">
             
+            <div class="selection">
+            <select name="experiment" class="graph-selector" id="experiment-choice">
+              <option value="N/A" selected="selected">Select Experiment</option>
+              <option value="VirtualHome">Virtual Home (Simulation) </option>
+              <option value="RobotDemo"> Robot Execution (Real World)</option>
+            </select>
+            <select name="metric" class="graph-selector" id="metric-choice">
+              <option value="N/A" selected="selected">Select Metric</option>
+              <option value="executability">% Executability </option>
+              <option value="correctness">% Correctness</option>
+              <option value="lcs">Longest Common Subseq. (LCS)</option>
+              <option value="num_steps">No. of Steps</option>
+              <option value="num_corrections"> No. of Corrections</option>
+            </select>
+            </div>
           </div>
+          <canvas class="dynamic-results-graph" id ="chartContainer" style="width:100%;"></canvas>
+          
+
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+          <script>
+            const ctx = document.getElementById('chartContainer').getContext('2d');
+           
+            const myChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: ['Huang et al.','Re-Sampling','SayCan (Noisy)','CAPE: Success Only','CAPE: Implicit Cause','CAPE: Zero-Shot Explicit Cause','CAPE: Few-Shot Explicit Cause'],
+                datasets: [{
+                label: 'My First Dataset',
+                data: [0,0,0,0,0,0,0],
+                backgroundColor: [
+                  'rgba(128,128,128, 0.2)',
+                  'rgba(128,128,128, 0.2)',
+                  'rgba(128,128,128, 0.2)',
+                  'rgba(54, 162, 235, 0.3)',
+                  'rgba(54, 162, 235, 0.3)',
+                  'rgba(153, 102, 255, 0.3)',
+                  'rgba(153, 102, 255, 0.3)'
+                ],
+                borderColor: [
+                  'rgba(128,128,128, 0.2)',
+                  'rgba(128,128,128, 0.2)',
+                  'rgba(128,128,128, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(153, 102, 255, 0.2)'
+                ],
+                borderWidth: 1
+                }]
+              },
+              options: {
+                plugins:{
+                  legend: {
+                  display: false
+                  },
+                },
+                
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  },
+                  x: {
+                    ticks: {
+                    maxRotation: 90,
+                    minRotation: 90
+                  }
+                  }
+                }
+              }
+              
+            });
+            myChart.update();
+          </script>
+
+          <script>
+            var resultsData = {
+              "VirtualHome":{
+                "executability": [
+                    { "x": "Huang et al.", "y": 72.52 },
+                    { "x": "Re-Sampling", "y": 76.45 },
+                    { "x": "SayCan (Noisy)", "y": 97.33 },
+                    { "x": "CAPE: Success Only", "y": 97.57 },
+                    { "x": "CAPE: Implicit Cause", "y": 97.86 },
+                    { "x": "CAPE: Zero-Shot Explicit Cause", "y": 98.29 },
+                    { "x": "CAPE: Few-Shot Explicit Cause", "y": 98.57 },
+                ],
+                "correctness": [
+                  { "x": "Huang et al.", "y": 38.15 },
+                  { "x": "Re-Sampling", "y": 38.89 },
+                  { "x": "SayCan (Noisy)", "y": 22.59},
+                  { "x": "CAPE: Success Only", "y": 41.11 },
+                  { "x": "CAPE: Implicit Cause", "y": 42.22},
+                  { "x": "CAPE: Zero-Shot Explicit Cause", "y": 48.52 },
+                  { "x": "CAPE: Few-Shot Explicit Cause", "y": 49.63 },
+                ],
+                "lcs": [
+                  { "x": "Huang et al.", "y": 20.80 },
+                  { "x": "Re-Sampling", "y": 23.45 },
+                  { "x": "SayCan (Noisy)", "y": 19.43 },
+                  { "x": "CAPE: Success Only", "y": 23.79 },
+                  { "x": "CAPE: Implicit Cause", "y": 23.20 },
+                  { "x": "CAPE: Zero-Shot Explicit Cause", "y": 23.48 },
+                  { "x": "CAPE: Few-Shot Explicit Cause", "y": 24.20 },
+                ],
+                "num_steps": [
+                  { "x": "Huang et al.", "y": 7.21 },
+                  { "x": "Re-Sampling", "y": 6.87 },
+                  { "x": "SayCan (Noisy)", "y": 5.97 },
+                  { "x": "CAPE: Success Only", "y": 7.68 },
+                  { "x": "CAPE: Implicit Cause", "y": 7.48 },
+                  { "x": "CAPE: Zero-Shot Explicit Cause", "y": 8.16 },
+                  { "x": "CAPE: Few-Shot Explicit Cause", "y": 8.69 },
+                ],
+                "num_corrections": [
+                  { "x": "Huang et al.", "y": 0 },
+                  { "x": "Re-Sampling", "y": 7.67 },
+                  { "x": "SayCan (Noisy)", "y": 0 },
+                  { "x": "CAPE: Success Only", "y": 1.08 },
+                  { "x": "CAPE: Implicit Cause", "y": 0.93 },
+                  { "x": "CAPE: Zero-Shot Explicit Cause", "y": 0.72 },
+                  { "x": "CAPE: Few-Shot Explicit Cause", "y": 0.89 },
+              ]},
+              "RobotDemo":{"executability": [
+                  { "x": "Huang et al.", "y": 41.64 },
+                  { "x": "Re-Sampling", "y": 75.00},
+                  { "x": "SayCan", "y": 66.67 },
+                  { "x": "CAPE: Success Only", "y": 75.00 },
+                  { "x": "CAPE: Implicit Cause", "y": 75.00 },
+                  { "x": "CAPE: Zero-Shot Explicit Cause", "y": 100.0 },
+                  { "x": "CAPE: Few-Shot Explicit Cause", "y": 100.0 },
+              ],
+              "correctness": [
+                { "x": "Huang et al.", "y": 16.67 },
+                { "x": "Re-Sampling", "y": 13.33 },
+                { "x": "SayCan", "y": 16.67},
+                { "x": "CAPE: Success Only", "y": 18.33 },
+                { "x": "CAPE: Implicit Cause", "y": 20.00},
+                { "x": "CAPE: Zero-Shot Explicit Cause", "y": 31.67 },
+                { "x": "CAPE: Few-Shot Explicit Cause", "y": 45.00 },
+              ],
+              "lcs": [
+                { "x": "Huang et al.", "y": 26.77 },
+                { "x": "Re-Sampling", "y": 32.92 },
+                { "x": "SayCan", "y": 38.36},
+                { "x": "CAPE: Success Only", "y": 32.45 },
+                { "x": "CAPE: Implicit Cause", "y": 32.44 },
+                { "x": "CAPE: Zero-Shot Explicit Cause", "y": 48.12 },
+                { "x": "CAPE: Few-Shot Explicit Cause", "y": 65.07},
+              ],
+              "num_steps": [
+                { "x": "Huang et al.", "y": 2.40 },
+                { "x": "Re-Sampling", "y": 4.60},
+                { "x": "SayCan (Noisy)", "y": 6.80 },
+                { "x": "CAPE: Success Only", "y": 3.04 },
+                { "x": "CAPE: Implicit Cause", "y": 3.14 },
+                { "x": "CAPE: Zero-Shot Explicit Cause", "y": 6.30 },
+                { "x": "CAPE: Few-Shot Explicit Cause", "y": 11.70 },
+              ],
+              "num_corrections": [
+                { "x": "Huang et al.", "y": 0 },
+                { "x": "Re-Sampling", "y": 13.19 },
+                { "x": "SayCan (Noisy)", "y": 0 },
+                { "x": "CAPE: Success Only", "y": 2.25 },
+                { "x": "CAPE: Implicit Cause", "y": 1.83 },
+                { "x": "CAPE: Zero-Shot Explicit Cause", "y": 1.91 },
+                { "x": "CAPE: Few-Shot Explicit Cause", "y": 2.91 },
+              ]}
+            }
+
+            document.getElementById("experiment-choice").onchange = udpateGraph;
+            document.getElementById("metric-choice").onchange = udpateGraph;
+            function udpateGraph(){
+              
+              var e = document.getElementById("experiment-choice");
+              var m = document.getElementById("metric-choice");
+
+              var selected_experiment = e.options[e.selectedIndex].value;
+              var selected_metric = m.options[m.selectedIndex].value;
+
+
+              if (selected_experiment!="N/A" && selected_metric!="N/A"){
+                var dataArray = [];
+
+                for (let i = 0; i < resultsData[selected_experiment][selected_metric].length; i++) {
+                  dataArray.push(resultsData[selected_experiment][selected_metric][i].y);
+
+                }
+                
+                myChart.data.datasets[0].data = dataArray;
+                myChart.data.datasets[0].label = selected_metric;
+                myChart.update();
+              }
+            }
+          </script>
         </div>
+
+
         <!-- <div class="columns is-vcentered interpolation-panel">
           <div class="column is-3 has-text-centered">
             <img src="./static/images/interpolate_start.jpg"

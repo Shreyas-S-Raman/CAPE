@@ -1,7 +1,12 @@
+
+
 body {
   font-family: 'Noto Sans', sans-serif;
 }
 
+.selection{
+  padding-left: 25%;
+}
 
 .footer .icon-link {
     font-size: 25px;

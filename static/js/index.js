@@ -1,3 +1,4 @@
+
 window.HELP_IMPROVE_VIDEOJS = false;
 
 var INTERP_BASE = "./static/interpolation/stacked";
@@ -18,6 +19,9 @@ function setInterpolationImage(i) {
   image.oncontextmenu = function() { return false; };
   $('#interpolation-image-wrapper').empty().append(image);
 }
+
+
+
 
 
 $(document).ready(function() {
@@ -76,3 +80,13 @@ $(document).ready(function() {
     bulmaSlider.attach();
 
 })
+
+
+
+
+
+
+
+  
+
+
